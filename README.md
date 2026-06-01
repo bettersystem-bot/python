@@ -16,6 +16,8 @@
 - `01` 到 `12`：Python 3.10 异步编程学习路线
 - `13` 到 `18`：Python 并发机制与锁机制学习路线
 - `CONCURRENCY_LOCKS_GUIDE.md`：并发与锁专题总览
+- `19` 到 `26`：Python 网络编程学习路线
+- `NETWORK_PROGRAMMING_GUIDE.md`：网络编程专题总览
 
 ## 学习顺序
 
@@ -37,6 +39,14 @@
 16. `16_conditions_events`：学习 `Event`、`Condition`、`Queue`
 17. `17_processes`：学习多进程并行和进程间通信
 18. `18_async_locks`：学习 `asyncio.Lock`、`asyncio.Semaphore` 和协程同步
+19. `19_network_overview`：理解 IP、端口、协议、socket、DNS 和字节编码
+20. `20_tcp_socket`：用原生 socket 编写 TCP echo server/client
+21. `21_udp_socket`：理解 UDP 无连接通信和数据报
+22. `22_http_basics`：用标准库理解 HTTP 请求、响应和本地 HTTP 服务
+23. `23_framing_timeouts`：理解 TCP 粘包/拆包、消息边界和超时
+24. `24_concurrent_servers`：学习并发 TCP 服务端和 `socketserver`
+25. `25_selectors_nonblocking`：学习非阻塞 I/O、`selectors` 和事件驱动
+26. `26_asyncio_networking`：用 `asyncio` 编写异步 TCP 网络程序
 
 ## 为什么固定 Python 3.10
 
@@ -95,6 +105,14 @@ python3.10 15_thread_locks/thread_lock_tools.py
 python3.10 16_conditions_events/thread_coordination.py
 python3.10 17_processes/multiprocessing_basics.py
 python3.10 18_async_locks/async_lock_tools.py
+python3.10 19_network_overview/network_lookup.py
+python3.10 20_tcp_socket/tcp_echo_demo.py
+python3.10 21_udp_socket/udp_echo_demo.py
+python3.10 22_http_basics/http_server_client_demo.py
+python3.10 23_framing_timeouts/length_prefixed_protocol.py
+python3.10 24_concurrent_servers/threading_tcp_server.py
+python3.10 25_selectors_nonblocking/selectors_demo.py
+python3.10 26_asyncio_networking/asyncio_tcp_chat.py
 ```
 
 ## 知识地图
