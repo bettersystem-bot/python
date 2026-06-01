@@ -21,6 +21,10 @@
 6. `06_advanced`：学习异步迭代器、异步生成器、异步上下文管理器
 7. `07_bridge`：学习异步代码和阻塞代码之间如何衔接
 8. `08_project`：用一个小型项目把前面的知识串起来
+9. `09_exceptions`：学习并发任务中的异常传播、失败收集和关键任务保护
+10. `10_event_loop`：从事件循环视角理解卡顿、任务状态和调试方法
+11. `11_streams`：学习异步 TCP 流式 I/O、`StreamReader`、`StreamWriter` 和背压
+12. `12_testing`：学习如何用标准库测试异步函数、异常和超时
 
 ## 为什么固定 Python 3.10
 
@@ -51,6 +55,10 @@
 - 第 5 天：`06_advanced`
 - 第 6 天：`07_bridge`
 - 第 7 天：`08_project`
+- 第 8 天：`09_exceptions`
+- 第 9 天：`10_event_loop`
+- 第 10 天：`11_streams`
+- 第 11 天：`12_testing`
 
 ## 运行示例
 
@@ -65,7 +73,26 @@ python3.10 05_patterns/queue_pipeline.py
 python3.10 06_advanced/async_iterators_context.py
 python3.10 07_bridge/to_thread_bridge.py
 python3.10 08_project/mini_crawler.py
+python3.10 09_exceptions/exception_strategies.py
+python3.10 10_event_loop/event_loop_debugging.py
+python3.10 11_streams/stream_echo_demo.py
+python3.10 -m unittest 12_testing/test_async_service.py
 ```
+
+## 知识地图
+
+如果把异步编程想象成开一家高效餐厅：
+
+- `Coroutine` 是一张可以暂停和恢复的订单
+- `Task` 是已经交给大厅经理排队执行的订单
+- `Event Loop` 是大厅经理，决定谁现在继续推进
+- `await` 是订单主动让出服务员，等待后厨、外卖员或收银台返回
+- `gather` / `wait` / `as_completed` 是不同的取餐策略
+- `Queue` 是待处理订单池
+- `Semaphore` 是厨房同时能处理的炉灶数量
+- `Timeout` 和 `Cancellation` 是超时退单和主动取消
+- `Stream` 是源源不断流入流出的水管
+- `Testing` 是开店前的试营业，提前验证慢请求、失败请求和边界情况
 
 ## 学习异步时最重要的三个问题
 
