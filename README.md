@@ -11,6 +11,12 @@
 - `README.md`：详细讲解核心概念、使用场景、观察重点、练习建议
 - `.py` 示例：可以直接运行，帮助你把概念和输出行为对应起来
 
+## 专题入口
+
+- `01` 到 `12`：Python 3.10 异步编程学习路线
+- `13` 到 `18`：Python 并发机制与锁机制学习路线
+- `CONCURRENCY_LOCKS_GUIDE.md`：并发与锁专题总览
+
 ## 学习顺序
 
 1. `01_coroutines`：理解 `async def`、`await`、协程对象和事件循环
@@ -25,6 +31,12 @@
 10. `10_event_loop`：从事件循环视角理解卡顿、任务状态和调试方法
 11. `11_streams`：学习异步 TCP 流式 I/O、`StreamReader`、`StreamWriter` 和背压
 12. `12_testing`：学习如何用标准库测试异步函数、异常和超时
+13. `13_concurrency_overview`：建立并发、并行、异步、线程、进程、协程的全局地图
+14. `14_threads_and_gil`：理解线程、GIL、竞态条件，以及为什么 GIL 不等于线程安全
+15. `15_thread_locks`：学习 `Lock`、`RLock`、`Semaphore`
+16. `16_conditions_events`：学习 `Event`、`Condition`、`Queue`
+17. `17_processes`：学习多进程并行和进程间通信
+18. `18_async_locks`：学习 `asyncio.Lock`、`asyncio.Semaphore` 和协程同步
 
 ## 为什么固定 Python 3.10
 
@@ -77,6 +89,12 @@ python3.10 09_exceptions/exception_strategies.py
 python3.10 10_event_loop/event_loop_debugging.py
 python3.10 11_streams/stream_echo_demo.py
 python3.10 -m unittest 12_testing/test_async_service.py
+python3.10 13_concurrency_overview/concurrency_map.py
+python3.10 14_threads_and_gil/thread_race_demo.py
+python3.10 15_thread_locks/thread_lock_tools.py
+python3.10 16_conditions_events/thread_coordination.py
+python3.10 17_processes/multiprocessing_basics.py
+python3.10 18_async_locks/async_lock_tools.py
 ```
 
 ## 知识地图
