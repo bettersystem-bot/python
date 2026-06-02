@@ -1,0 +1,84 @@
+# 异步编排调度系统 —— 一键启动
+# 启动后：
+#   前端控制台  http://localhost:5173
+#   后端文档    http://localhost:8000/docs
+#
+# 架构对照：
+#   redis      = 消息队列（队列A/B/C） + 结果队列
+#   backend    = core service（dag parser/executor/scheduler + API + WebSocket）
+#   worker-*   = 训推下游常驻 worker（从队列拉取消费）。这里起 3 个，演示竞争消费与水平扩展。
+#   frontend   = 业务侧控制台（React）
+
+services:
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 3s
+      timeout: 3s
+      retries: 10
+
+  backend:
+    build: ./backend
+    environment:
+      REDIS_URL: redis://redis:6379/0
+      APP_PORT: "8000"
+    ports:
+      - "8000:8000"
+    depends_on:
+      redis:
+        condition: service_healthy
+
+  # 三个 worker 共享同一镜像，加入同一消费组形成竞争消费（负载均衡）。
+  # 通过 WORKER_QUEUES 让不同 worker 专注不同队列，演示"按类型路由到不同算力池"。
+  worker-cpu:
+    build: ./backend
+    command: python -m app.workers.worker
+    environment:
+      REDIS_URL: redis://redis:6379/0
+      CORE_API_BASE: http://backend:8000
+      WORKER_QUEUES: cpu
+      WORKER_CONCURRENCY: "4"
+    depends_on:
+      redis:
+        condition: service_healthy
+      backend:
+        condition: service_started
+
+  worker-io:
+    build: ./backend
+    command: python -m app.workers.worker
+    environment:
+      REDIS_URL: redis://redis:6379/0
+      CORE_API_BASE: http://backend:8000
+      WORKER_QUEUES: io
+      WORKER_CONCURRENCY: "8"
+    depends_on:
+      redis:
+        condition: service_healthy
+      backend:
+        condition: service_started
+
+  # 这个 worker 同时消费 gpu 与 cpu，演示"一个 worker 可订阅多个队列"。
+  worker-gpu:
+    build: ./backend
+    command: python -m app.workers.worker
+    environment:
+      REDIS_URL: redis://redis:6379/0
+      CORE_API_BASE: http://backend:8000
+      WORKER_QUEUES: gpu,cpu
+      WORKER_CONCURRENCY: "3"
+    depends_on:
+      redis:
+        condition: service_healthy
+      backend:
+        condition: service_started
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend

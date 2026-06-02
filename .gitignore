@@ -2,3 +2,11 @@ __pycache__/
 .pytest_cache/
 .venv/
 *.pyc
+
+# node / vite
+node_modules/
+dist/
+.vite/
+
+# os
+.DS_Store
