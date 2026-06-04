@@ -103,3 +103,12 @@ python3.10 -m unittest 12_testing/test_async_service.py
 - 等待结束以后，谁会把这个协程继续调度回来？
 
 如果你越来越能清楚回答这三个问题，说明你对异步编程的理解正在变扎实。
+
+## 延伸学习：Go Kitex 框架
+
+如果你已经完成 Python 异步编程路线，想继续学习 Go 微服务 RPC，可以阅读新增的 Kitex 教学材料：
+
+- [`go-kitex/README.md`](go-kitex/README.md)：Kitex 学习路线总览
+- [`go-kitex/examples/hello_thrift/echo.thrift`](go-kitex/examples/hello_thrift/echo.thrift)：最小 Thrift IDL 示例
+
+这部分材料重点讲清楚 `IDL → 代码生成 → Server Handler → Client 调用 → 服务治理 → 排障` 的完整链路。
